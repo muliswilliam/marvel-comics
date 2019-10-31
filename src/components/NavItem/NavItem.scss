@@ -1,0 +1,27 @@
+@import "../../styles/palette";
+
+.nav-item {
+  &__link-wrapper {
+    text-transform: uppercase;
+    font-weight: 800;
+    padding: 0 18px;
+    margin: 0 auto;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    color: $font-color;
+    height: 100%;
+    box-sizing: border-box;
+    border-bottom: 2px solid transparent;
+    text-decoration: none;
+  }
+
+  &__link:hover {
+    border-bottom: 2px solid $marvel-red;
+    color: $font-color;
+  }
+}
