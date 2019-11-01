@@ -1,4 +1,4 @@
-import actions, {actionTypes} from './actions';
+import {actionTypes} from './actions';
 
 const getInitialState = () => ({
 	comics: [],

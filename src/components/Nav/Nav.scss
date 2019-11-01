@@ -1,4 +1,4 @@
-@import "../../styles/palette";
+@import '../../styles/palette';
 
 .nav {
   width: 100%;
@@ -17,7 +17,9 @@
 
   &__lower {
     &-wrapper {
+      position: relative;
       background-color: $nav-background;
+      border-bottom: 1px solid $nav-border;
     }
 
     height: 40px;

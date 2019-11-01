@@ -1,10 +1,7 @@
 import React, {Component} from 'react';
-import {Grid} from 'semantic-ui-react';
-import MCard from '../Card/Card';
 
 import './Comics.scss';
-import InfiniteScroll from 'react-infinite-scroll-component';
-import Loader from 'semantic-ui-react/dist/commonjs/elements/Loader';
+import ComicsList from '../ComicsList/ComicsList';
 
 class Comics extends Component {
 	constructor(props) {
@@ -24,37 +21,16 @@ class Comics extends Component {
 		}
 	};
 
-	renderComics = () => {
-		const comics = this.props.comic.comics.filter(comic => comic.images.length > 0);
-		return comics.map( (comic, index) =>
-			<Grid.Column key={index}>
-				<MCard {...comic}/>
-			</Grid.Column>
-		)
-	};
-
 	render(props) {
 		const { hasMoreComics } = this.props;
-		const { comics } = this.props.comic;
+		const { comics, isFetching } = this.props.comic;
 		return (
-			<div className="grid-container">
-				<InfiniteScroll
-					next={this.getComics}
-					hasMore={hasMoreComics}
-					dataLength={comics.length}
-					loader={<Loader />}
-					style={{
-						height: '100%',
-						overflow: 'visible'
-					}}
-				>
-					<Grid>
-						<Grid.Row columns={5}>
-							{ this.renderComics() }
-						</Grid.Row>
-					</Grid>
-				</InfiniteScroll>
-			</div>
+			<ComicsList
+				comics={comics}
+				hasMoreComics={hasMoreComics}
+				isFetching={isFetching}
+				getComics={this.getComics}
+			/>
 		);
 	}
 }
