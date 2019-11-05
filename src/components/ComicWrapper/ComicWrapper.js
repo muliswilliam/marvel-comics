@@ -1,24 +1,37 @@
-import React from 'react';
-import { useParams } from 'react-router';
+import React, { Component } from 'react';
+import { Loader } from 'semantic-ui-react';
 
 import Comic from '../Comic/Comic';
 
-function ComicWrapper(props) {
-  const { comicId } = useParams();
-  const { selectComic } = props;
-
-  function getComic() {
-    const comic = selectComic(parseInt(comicId));
-    console.log(comic);
-
-    if (comic) {
-      return comic;
-    } else {
-      // load comic from the api
+class ComicWrapper extends Component {
+  constructor(props) {
+    super(props);
+    this.comicId = this.props.match.params.comicId;
+  }
+  componentDidMount() {
+    const comic = this.selectComic();
+    if (!comic) {
+      this.props.getComic(this.comicId);
     }
   }
 
-  return <Comic comic={getComic()} selectComic={selectComic}></Comic>;
+  selectComic = () => {
+    const { comics } = this.props;
+    return comics.find(c => c.id == this.comicId);
+  };
+
+  renderComic = () => {
+    const comic = this.selectComic(this.comicId);
+    if (this.props.isFetching == false && comic) {
+      return <Comic comic={comic} />;
+    } else {
+      return <Loader active inline="centered" content="Loading" />;
+    }
+  };
+
+  render() {
+    return this.renderComic();
+  }
 }
 
 export default ComicWrapper;
