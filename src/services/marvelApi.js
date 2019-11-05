@@ -10,6 +10,10 @@ const marvelApi = {};
 
 const getParams = (page = 0, limit = LIMIT) => ({ offset: page * limit, limit, orderBy: '-focDate' });
 
+marvelApi.getComic = (comicId) => {
+	return client.get(`/v1/public/comics/${comicId}`);
+}
+
 marvelApi.getComics = (page, limit) => {
 	const params = getParams(page, limit);
 	return client.get('/v1/public/comics', params);
