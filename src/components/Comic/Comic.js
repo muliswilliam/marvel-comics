@@ -8,14 +8,20 @@ import selectDate from 'utils/selectDate';
 
 class Comic extends Component {
   getCreatorName = (creators, role) => {
-	console.log(creators);
-	const creator = creators.find(creator => creator.role === role);
+    const creator = creators.find(creator => creator.role === role);
 
-	return creator ? creator.name : '-';
+    return creator ? creator.name : '-';
   };
 
   render() {
-    const { title, images, dates, description, creators, thumbnail } = this.props.comic;
+    const {
+      title,
+      images,
+      dates,
+      description,
+      creators,
+      thumbnail
+    } = this.props.comic;
 
     return (
       <div className="comic-wrapper">
@@ -25,7 +31,11 @@ class Comic extends Component {
               <Grid.Column width={6}>
                 <div className="comic__image">
                   <Image
-                    src={images.length > 0 ? generateUrl(images[0]): generateUrl(thumbnail)}
+                    src={
+                      images.length > 0
+                        ? generateUrl(images[0])
+                        : generateUrl(thumbnail)
+                    }
                     className="comic__image"
                   />
                 </div>
@@ -47,12 +57,16 @@ class Comic extends Component {
                   </Grid.Column>
                   <Grid.Column className="right">
                     <h2>Cover Artist</h2>
-                    <p>{this.getCreatorName(creators.items, 'penciller (cover)')}</p>
+                    <p>
+                      {this.getCreatorName(creators.items, 'penciller (cover)')}
+                    </p>
                   </Grid.Column>
                 </Grid>
                 <Grid columns={1}>
                   <Grid.Column width={10}>
-                    <p>{description ? description : 'Description not available.'}</p>
+                    <p>
+                      {description ? description : 'Description not available.'}
+                    </p>
                     <a href="#">
                       See Variant covers
                       <Icon name="arrow right" />
@@ -67,9 +81,5 @@ class Comic extends Component {
     );
   }
 }
-
-Comic.propTypes = {
-  selectComic: PropTypes.func.isRequired
-};
 
 export default Comic;
