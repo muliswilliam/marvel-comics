@@ -10,5 +10,5 @@ export const hasMoreComics = createSelector(
 );
 
 export const selectComic = state => comicId => {
-  return state.comic.comics.find(comic => comic.id === comicId);
+  return state.comic.comics.find(comic => comic.id == comicId);
 };
